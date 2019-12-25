@@ -27,7 +27,7 @@ class CommentForm extends Component{
     }
     handleSubmit(values){
         console.log("Current State is: "+ JSON.stringify(values));
-        alert("Current State is: "+ JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
     }
     render(){
         return(
@@ -119,7 +119,7 @@ class CommentForm extends Component{
             );
         }
     }
-    function RenderComment({comments}){
+    function RenderComment({comments, addComment, dishId}){
         console.log(comments);
 
         if(comments!= null){
@@ -140,7 +140,7 @@ class CommentForm extends Component{
                 <div className="container">
                 <h4>Comment</h4>
                 {comment}
-                <CommentForm />
+                <CommentForm dishId={dishId} addComment={addComment} />
                 </div>
             )
             
@@ -171,7 +171,8 @@ class CommentForm extends Component{
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         
-                        <RenderComment comments= {props.comments} />
+                        <RenderComment comments= {props.comments} addComment= { props.addComment}
+                        dishId = { props.dish.id} />
                     </div>
                 </div>
             </div>
